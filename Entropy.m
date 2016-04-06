@@ -8,20 +8,16 @@ function H=Entropy(P)
 
 [m, n]=size(P);
 if([m, n]==[1 1])   %Scalar
-    'scal'
     if(P==0)
         H=0;
     else
         H=-P*log2(P)-(1-P)*log2(1-P);
     end
 elseif(n==1)        %Column vector
-    'col'
     H=sum(-P.*log2(P));
 elseif(m==1)        %Row vector
-    'row'
     H=-P.*log2(P)-(1-P).*log2(1-P);
 else                %matrix
-    'matrix'
     H=sum(-P.*log2(P));
 end
 end
