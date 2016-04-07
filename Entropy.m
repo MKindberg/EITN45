@@ -7,11 +7,7 @@ function H=Entropy(P)
 % P row vector: Each position gives binary entropy function
 
 [m, n]=size(P);
-if [m n] == [1 1]   %Scalar
-    H=-P*lg2(P)-(1-P)*lg2(1-P);
-elseif n==1         %Column vector
-    H=sum(-P.*lg2(P));
-elseif m==1         %Row vector
+if m == 1   %Scalar
     H=-P.*lg2(P)-(1-P).*lg2(1-P);
 else                %matrix
     H=sum(-P.*lg2(P));
