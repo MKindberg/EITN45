@@ -10,14 +10,21 @@ count=zeros(1, 122);
 for i = Letters
     count(i)=count(i)+1;
 end
+%count(13)=0;
     
-dist=count/length(Letters);
-distKeys=[];
-distVals=[];
+dist=count/sum(count);
+
+distM=[];
 for i=1:122
     if dist(i)~=0
-        distKeys=[distKeys;mat2cell(cast(i, 'char'), 1)];
-        distVals=[distVals dist(i)];
+        distM=[distM;{cast(i, 'char')} {dist(i)}];
     end
 end
-distMap=containers.Map(distKeys, distVals)
+
+C=Huffman(distM);
+
+E=encrypt(Txt, C);
+
+bps = length(E)/(length(Txt)*8)
+
+ratio01 = length(strfind(E, '0'))/length(strfind(E, '1')) 
