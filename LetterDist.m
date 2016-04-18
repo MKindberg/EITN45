@@ -28,3 +28,9 @@ E=encrypt(Txt, C);
 bps = length(E)/(length(Txt)*8)
 
 ratio01 = length(strfind(E, '0'))/length(strfind(E, '1')) 
+
+%matlabs inbyggda
+sym=distM(:, 1);
+p=cell2mat(distM(:, 2));
+dict=huffmandict(sym, p);
+comp=huffmanenco(Txt,dict);

@@ -13,7 +13,7 @@ d=cell2mat(D(1));
 code='';
 keys=[];
 vals=[];
-for i=(length(d)-1):-1:1
+for i=(length(d)):-1:1
     if d(i)==')'
         code=[code '0'];
     elseif d(i)=='(' && ~isempty(code)
