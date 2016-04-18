@@ -1,19 +1,21 @@
 clear;
 fid = fopen('LifeOnMars.txt');
-Txt = fscanf(fid,'%c');
+txt = fscanf(fid,'%c');
 fclose(fid);
 
-Letters=cast(Txt, 'uint8');
+letters=cast(txt, 'uint8');
 
 count=zeros(1, 122);
 
-for i = Letters
+% Count the ocurances of each letter
+for i = letters
     count(i)=count(i)+1;
 end
-%count(13)=0;
-    
+
+% Turn the count into probability.
 dist=count/sum(count);
 
+% Remove all zeros and change to a better format.
 distM=[];
 for i=1:122
     if dist(i)~=0
@@ -21,16 +23,17 @@ for i=1:122
     end
 end
 
+% Calculate the codewords.
 C=Huffman(distM);
 
-E=encrypt(Txt, C);
+% Encrypt the text
+E=encrypt(txt, C);
 
-bps = length(E)/(length(Txt)*8)
+% Calculate the average number of bits per symbol.
+compRatio = (length(txt)*8)/length(E)
+
+bps = length(E)/(length(txt))
+
+entropy = Entropy(cell2mat(distM(:,2)))
 
 ratio01 = length(strfind(E, '0'))/length(strfind(E, '1')) 
-
-%matlabs inbyggda
-sym=distM(:, 1);
-p=cell2mat(distM(:, 2));
-dict=huffmandict(sym, p);
-comp=huffmanenco(Txt,dict);

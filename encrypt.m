@@ -1,7 +1,11 @@
-function E=encrypt(T, C)
+function E=encrypt(T, D)
+% Encrypts the given text according to the given dictionary.
+%
+% T: The text to be encrypted.
+% D: The dictionary to encrypt by.
+
+
 E=[];
 for i=1:length(T)
-    %if(cast(T(i), 'uint8')~=13)
-        E=[E C(T(i))];
-    %end
+    E=[E D(T(i))];
 end

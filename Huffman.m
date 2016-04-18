@@ -1,14 +1,23 @@
 function C=Huffman(D)
+% Generates Huffman codes for the given distribution
+%
+% D: A two dimensional cell array containing the letters in the first
+% column and their probabilities in the second column.
 
+
+% Uses Huffmans algorithm to generate a binary tree (as a string) to
+% represent the code.
 while size(D)>1
-    %sort on probability
+    % Sort on probability.
     D=sortrows(D, 2);
-    %get 2 least probable from D
+    % Get 2 least probable from D.
     new=[{['(' cell2mat(D(1, 1)) ',' cell2mat(D(2, 1)) ')']} {cell2mat(D(1, 2)) + cell2mat(D(2, 2))}];
-    %remove them and add as one element
+    % Remove them and add as one element.
     D(1, :)=[];
     D(1, :)=new;
 end
+
+% Parses the tree-string to get the codes.
 d=cell2mat(D(1));
 code='';
 keys=[];
